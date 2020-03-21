@@ -110,7 +110,7 @@ class GoogleMapsContainer extends Component {
           name={'Kenyatta International Convention Centre'}
         />
         
-        
+        {/* 이 밑에 부분이 안되요 ㅠㅠㅠㅠㅠ */}
         {this.state.data.map((data, i) =>
            <Marker key={i}
            onClick = { this.onMarkerClick }
