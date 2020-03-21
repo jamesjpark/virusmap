@@ -16,12 +16,53 @@ h1,h2,h3,h4,h5{
 .num{
   float : right;
   width : 25%;
+  margin-top: 2.5%;
   margin-right : 2.5%;
   vertical-align : top;
   border : black solid 2px;
-  background-color :grey;
+  background-color :rgb(83, 79, 79);
+  border-radius: 4%;
+  border-top-right-radius: 4% ;
+}
+.data{
+  border-bottom : black solid 2px;
+  text-align : center;
+  border : 1px solid black;
+  height : 30px;
+  font-size : 20px;
+
+}
+table{
+  border-collapse: collapse;
+  table-layout: fixed; 
+  width: 100%;
+
 }
 
 body{
-  background-color : darkgrey;
+  background-color : black;
+
+}
+div.scroll { 
+ 
+  height: 46.85vh;
+  overflow-x: hidden; 
+  overflow-x: auto; 
+  text-align:justify; 
+  border-radius :4%;
+  z-index : 1000;
+  position : relative;
+} 
+
+.caseTitle{
+  position : sticky;
+  top : 0;
+  background-color :rgb(83, 79, 79);
+  box-shadow : 0 0 20px 10px rgb(83, 79, 79);
+  color: red;
+  border-radius : 4%;
+}
+
+.map{
+  width : 70%;
 }
