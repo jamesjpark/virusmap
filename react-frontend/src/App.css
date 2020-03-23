@@ -32,6 +32,14 @@ h1,h2,h3,h4,h5{
   font-size : 20px;
 
 }
+.topTable{
+  border: black solid 2px;
+  text-align : center;
+  border : 1px solid black;
+  height : 33px;
+  font-size : 25px;
+  font-style : bold;
+}
 table{
   border-collapse: collapse;
   table-layout: fixed; 
@@ -59,10 +67,45 @@ div.scroll {
   top : 0;
   background-color :rgb(83, 79, 79);
   box-shadow : 0 0 20px 10px rgb(83, 79, 79);
-  color: red;
+
   border-radius : 4%;
 }
 
+.total{
+
+  font-size : 25px;
+  color : black;
+  margin-left : 20px;
+}
+.death{
+  font-size : 20px;
+  margin-bottom :  20px;
+  color : red;
+  margin-left : 20px;
+}
 .map{
   width : 70%;
+}
+
+.county{
+  font-size : 20px;
+  text-align: center;
+}
+
+.number{
+  color : red;
+}
+
+.compare{
+  color : green;
+  font-size : 15px;
+}
+
+.legendL{
+  color : green;
+}
+.legend{
+  float: right;
+  font-size : 15px;
+  margin-right : 10px;
 }

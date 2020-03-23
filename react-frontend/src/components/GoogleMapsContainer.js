@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { GoogleApiWrapper, InfoWindow, Map, Marker } from 'google-maps-react';
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import axios from 'axios';
+import previousData from '../data/17-Mar-2020corona-data.json'
 
+import Geocode from "react-geocode";
+
+Geocode.setApiKey("AIzaSyDk5zS4teB6rs0CKgbL_ptbxRhekDGMuig");
+Geocode.enableDebug();
 
 class GoogleMapsContainer extends Component {
   constructor(props) {
@@ -13,12 +15,14 @@ class GoogleMapsContainer extends Component {
       activeMarker: {},
       selectedPlace: {},
       data:[],
-      county : []
+      county : [],
+      json: [],
+      prev : previousData
     }
     // binding this to event-handler functions
     this.onMarkerClick = this.onMarkerClick.bind(this);
     this.onMapClick = this.onMapClick.bind(this);
-
+    
     
   }
   
@@ -37,6 +41,9 @@ class GoogleMapsContainer extends Component {
       });
     }
   }
+
+  
+
   componentDidMount() {
     fetch('http://localhost:5000')
     .then(res => res.json())
@@ -44,50 +51,59 @@ class GoogleMapsContainer extends Component {
       this.setState({
         data: data
       });
+      const tmpdata = this.state.data
+      var tmpjson = [];
+      for (var i=0;i<=tmpdata.length;i++) {
+        const address = tmpdata[i].county + "county, Texas"
+        const name = tmpdata[i].county;
+        const number = tmpdata[i].number;
+        Geocode.fromAddress(address)
+        .then(response => {
+            const newEntry = {
+              "name" : name,
+              "number" : number, 
+              "position": response.results[0].geometry.location
+            };
+            tmpjson.push(newEntry);
+
+            this.setState({
+              json: tmpjson
+            });
+          },
+          error => {
+            console.error(error);
+          }
+        );
+      }
+    
     })
     .catch(err => console.error(err));
-    
-    
+
+    // for(i =0; i<this.state.)
+    // const newData ={
+    //   "number" : 
+    // }
+
 }
 
   render() {
-    
+
+    var dataCopy2 = this.state.data;
 
 
-    function geolat(loc){
-      axios.get("https://maps.googleapis.com/maps/api/geocode/json",{
-        params:{
-          address:loc,
-          key : "AIzaSyDk5zS4teB6rs0CKgbL_ptbxRhekDGMuig"
-          
+    console.log(dataCopy2);
+    function search(county){
+      for(var i =0; i < dataCopy2.length; i++){
+        if(county === dataCopy2[i].county){
+          return dataCopy2[i].number;
         }
-      })
-      .then(function(response){
-        console.log(response)
-          var lat = response.data.results[0].geometry.location.lat;
-          console.log(lat)
-        
-        return lat;
-      })
-      
+      }
+
     }
     
-    function geolng(loc){
-      axios.get("https://maps.googleapis.com/maps/api/geocode/json",{
-        params:{
-          address:loc,
-          key : "AIzaSyDk5zS4teB6rs0CKgbL_ptbxRhekDGMuig"
-          
-        }
-      })
-      .then(function(response){
-        console.log(response)
-        var lng = response.data.results[0].geometry.location.lng;
-        console.log(lng)
-        return lng;
-      })
-      
-    }
+    
+    
+
     const style = {
       width: '70%',
       height: '100%',
@@ -105,35 +121,34 @@ class GoogleMapsContainer extends Component {
         zoom = { 7 }
         initialCenter = {{ lat: 31.648209, lng: -96.711185 }}
       >
-        <Marker
-          onClick={this.onMarkerClick}
-          name={'Kenyatta International Convention Centre'}
-        />
         
-        {/* 이 밑에 부분이 안되요 ㅠㅠㅠㅠㅠ */}
-        {this.state.data.map((data, i) =>
+        
+        {this.state.json.map((data, i) =>
            <Marker key={i}
            onClick = { this.onMarkerClick }
-           title = {data.county+ " county"}
-           position =  {{ lat : geolat(data.county+" county|texas"), lng : geolng(data.county+" county|texas")}}
-           name = {data.county}
+           title = {data.name}
+           position =  {data.position}
+           name = {data.name}
            />
-         )
-         }
+         )}
 
 
-        <InfoWindow
-          marker = { this.state.activeMarker }
-          visible = { this.state.showingInfoWindow }
-        >
-          <div> <h4>아니씨뿌레꺼 왜 안되냐아오</h4>
-
-          </div>
-        </InfoWindow>
+           <InfoWindow 
+           marker = { this.state.activeMarker }
+           visible = { this.state.showingInfoWindow }
+         >
+           <div> <h4 className = "county">{this.state.selectedPlace.name} County</h4>
+                <span className = "number">{search(this.state.selectedPlace.name)} </span> <span>cases</span>
+                <span className = "info_compared">() </span>
+           </div>
+         </InfoWindow>
+ 
+        
       </Map>
 
       
     );
+    
   }
   
 }

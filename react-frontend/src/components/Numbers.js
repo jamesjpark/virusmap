@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
+import previousData from '../data/17-Mar-2020corona-data.json'
 
 
 class Numbers extends Component {
     constructor(props){
         super(props);
         this.state = {
-          data: [] 
+          data: [] ,
+          total : "loading...",
+          death : "loading...",
+          prev : previousData,
+
+
         };
         // state는 항상 오프젝트로 만들고 
         // 그 안에 어레이를 넣어놓는게 안전해
@@ -25,9 +31,64 @@ class Numbers extends Component {
           // 이렇게 해서 서버에서 받아온 데이터를 state 안에 data로 맵핑시키는거야
           // 그럼 state가 바뀌니까 render가 자동으로 돌아가게 되겠지? 그럼 페이지
           // 받아온 데이터가 보여질거고
+
+           var dataCopy = this.state.data;
+           var prevCopy = this.state.prev;
+           var j = 0;
+           var prevTot = 0;
+           var currTot = 0;
+           for(var i = 0; i<dataCopy.length; i++){
+             currTot += parseInt(dataCopy[i].number);
+           }
+           for(i = 0; i<prevCopy.length; i++){
+            prevTot += parseInt(prevCopy[i].number);
+          }
+           var tot =  currTot-prevTot;
+           console.log(tot)
+          for( i =0; i<dataCopy.length; i++){
+          if(dataCopy[i].county === prevCopy[j].county){
+            var tmp = dataCopy[i].number - prevCopy[j].number;
+            if(tmp < 0){
+              dataCopy[i].prevNum = "-"+tmp;
+
+            }
+            dataCopy[i].prevNum = "+"+tmp;
+
+            j++;
+          }
+          else{
+            dataCopy[i].prevNum = "+"+dataCopy[i].number;
+
+          }
+        }
+        
+        this.setState({
+          data : dataCopy
+        });
+        this.setState({
+          previousTotal : tot
+        });
+    
         })
         .catch(err => console.error(err));
-    }
+
+        fetch('http://localhost:5000/total')
+        .then(res => res.json())
+        .then(data => {
+          this.setState({
+            total: data[0],
+            death : data[1]
+          });
+        
+    })
+
+
+    
+         
+    
+
+  }
+  
     
     render() {
         return (
@@ -35,10 +96,26 @@ class Numbers extends Component {
                 <div className = "scroll">
                     <h2 className = "caseTitle">COVID-19 Cases in Texas</h2>
                     <br></br>
+                    <div className = "legend">
+                    <span className = "legendL">( ) : </span>
+                    <span className = "legendR">change of numbers since 03/17/2020</span>
+                    </div>
+                    {console.log(this.state.data)}
+
+                    <br></br>
+                    <span className ="total">Total : {this.state.total} </span>
+                    <span className = "compare">(+{this.state.previousTotal}) </span>
+                    <br></br>
+                    <h2 className = "death">Death : {this.state.death} </h2>
+                    <table>
+                      <td className = "topTable">County</td>
+                      <td className = "topTable">Number of Cases</td>
+
+                    </table>
                     {this.state.data.map((data, i) =>
                       <table key={i}> 
                         <td className = "data">{data.county}</td>
-                        <td className = "data">{data.number}</td>
+                        <td className = "data">{data.number}  <span className = "compare">({data.prevNum})</span></td>
                       </table>
                     )}
                     {/* map 쓸 때는 항상 리턴하는 html의 첫번째 tag에 key가 있어야해 

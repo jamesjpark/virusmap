@@ -11,10 +11,11 @@ class App extends Component{
   return (
     <div className = "App">
     <Navbar/>
+    <Numbers/>
+
     <GoogleMapsContainer className="map"/>
 
     
-    <Numbers/>
    
 
     </div>
