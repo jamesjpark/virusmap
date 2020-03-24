@@ -7,7 +7,7 @@ import flask
 from threading import Timer
 from flask import jsonify
 from flask_cors import CORS
-
+import datetime
 
 def scrape():
     source = requests.get('https://www.dshs.state.tx.us/news/updates.shtm#coronavirus', verify=False)
@@ -28,17 +28,17 @@ def scrape():
     while i < len(arr):
         county = arr[i].text
         num = arr[i + 1].text
+        death = arr[i + 2].text
         print(county)
         print(num)
         print()
         case = {
             "county": county,
             "number": num,
-            "lat" : 0,
-            "lng" : 0
+            "death" : death
         }
         caseArr.append(case)
-        i += 2
+        i += 3
 
     print(caseArr)
     # with open('corona-data.json', 'w') as outfile:
@@ -65,20 +65,44 @@ def totalNum():
 
     return totalArr
 
+now = datetime.datetime.now().hour
+start = now
+print(now)
+
+case = scrape()
+total = totalNum()
+
 
 
 app = flask.Flask("__main__")
 CORS(app)
 
+
 @app.route("/")
 def my_index():
-
-    caseArr = scrape()
+    print(datetime.datetime.now().hour)
+    print(start)
+    if (datetime.datetime.now().hour - start) > 12:
+        caseArr = scrape()
+        print("SCRAPED!!")
+    elif (datetime.datetime.now().hour - start) < 0:
+        caseArr = scrape()
+        print("SCRAPED!!")
+    else:
+        caseArr = case
     return jsonify(caseArr)
+
 
 @app.route("/total")
 def index():
-    totalArr = totalNum()
+    if (datetime.datetime.now().hour - start) > 12:
+        totalArr = totalNum()
+        print("SCRAPED!!")
+    elif (datetime.datetime.now().hour - start) < 0:
+        totalArr = totalNum()
+        print("SCRAPED!!")
+    else:
+        totalArr = total
     return jsonify(totalArr)
 
 app.run(debug=True)

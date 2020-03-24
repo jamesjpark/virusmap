@@ -99,9 +99,13 @@ class Numbers extends Component {
                     <div className = "legend">
                     <span className = "legendL">( ) : </span>
                     <span className = "legendR">change of numbers since 03/17/2020</span>
+                    <br></br>
+                    <span className = "legendR">*Does not include repatriation cases.</span>
+                    <br></br>
                     </div>
                     {console.log(this.state.data)}
 
+                    <br></br>
                     <br></br>
                     <span className ="total">Total : {this.state.total} </span>
                     <span className = "compare">(+{this.state.previousTotal}) </span>

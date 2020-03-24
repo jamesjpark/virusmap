@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { GoogleApiWrapper, InfoWindow, Map, Marker } from 'google-maps-react';
-import previousData from '../data/17-Mar-2020corona-data.json'
+import previousData from '../data/23-Mar-2020corona-data.json'
 
 import Geocode from "react-geocode";
 
@@ -50,7 +50,42 @@ class GoogleMapsContainer extends Component {
     .then(data => {
       this.setState({
         data: data
-      });
+      });var dataCopy = this.state.data;
+      var prevCopy = this.state.prev;
+      var j = 0;
+      var prevTot = 0;
+      var currTot = 0;
+      for(var i = 0; i<dataCopy.length; i++){
+        currTot += parseInt(dataCopy[i].number);
+      }
+      for(i = 0; i<prevCopy.length; i++){
+       prevTot += parseInt(prevCopy[i].number);
+     }
+      var tot =  currTot-prevTot;
+      console.log(tot)
+     for( i =0; i<dataCopy.length; i++){
+     if(dataCopy[i].county === prevCopy[j].county){
+       var tmp = dataCopy[i].number - prevCopy[j].number;
+       if(tmp < 0){
+         dataCopy[i].prevNum = "-"+tmp;
+
+       }
+       dataCopy[i].prevNum = "+"+tmp;
+
+       j++;
+     }
+     else{
+       dataCopy[i].prevNum = "+"+dataCopy[i].number;
+
+     }
+   }
+   
+   this.setState({
+     data : dataCopy
+   });
+   this.setState({
+     previousTotal : tot
+   });
       const tmpdata = this.state.data
       var tmpjson = [];
       for (var i=0;i<=tmpdata.length;i++) {
@@ -92,7 +127,7 @@ class GoogleMapsContainer extends Component {
 
 
     console.log(dataCopy2);
-    function search(county){
+    function searchNum(county){
       for(var i =0; i < dataCopy2.length; i++){
         if(county === dataCopy2[i].county){
           return dataCopy2[i].number;
@@ -101,18 +136,36 @@ class GoogleMapsContainer extends Component {
 
     }
     
+    function searchCom(county){
+      for(var i =0; i < dataCopy2.length; i++){
+        if(county === dataCopy2[i].county){
+          return dataCopy2[i].prevNum;
+        }
+      }
+
+    }
+    
+    function searchDeath(county){
+      for(var i =0; i < dataCopy2.length; i++){
+        if(county === dataCopy2[i].county){
+          return dataCopy2[i].death;
+        }
+      }
+    }
+    
     
     
 
     const style = {
-      width: '70%',
-      height: '100%',
+      width: '100%',
+      height: '94.7vh',
       display :'inline-block'
 
     }
     return (
 
         <Map
+
         item
         xs = { 12 }
         style = { style }
@@ -138,8 +191,11 @@ class GoogleMapsContainer extends Component {
            visible = { this.state.showingInfoWindow }
          >
            <div> <h4 className = "county">{this.state.selectedPlace.name} County</h4>
-                <span className = "number">{search(this.state.selectedPlace.name)} </span> <span>cases</span>
-                <span className = "info_compared">() </span>
+                <span >{searchNum(this.state.selectedPlace.name)} </span> <span>cases</span>
+                <br></br>
+                <span className = "info_compared">{searchCom(this.state.selectedPlace.name)} since yesterday</span>
+                <br></br>
+                <span className ="number">death : {searchDeath(this.state.selectedPlace.name)} </span>
            </div>
          </InfoWindow>
  

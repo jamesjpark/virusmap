@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
+
 body, h1, p, ul, h2,h3,h4,h5, dl, dd{
   margin : 0;
   padding : 0;
+  font-family : 'Rubik';
 }
 li{
   list-style-type: none;
@@ -14,31 +17,24 @@ h1,h2,h3,h4,h5{
   margin-bottom : -30px;
 }
 .num{
-  float : right;
-  width : 25%;
-  margin-top: 2.5%;
-  margin-right : 2.5%;
-  vertical-align : top;
-  border : black solid 2px;
-  background-color :rgb(83, 79, 79);
-  border-radius: 4%;
-  border-top-right-radius: 4% ;
+
 }
 .data{
-  border-bottom : black solid 2px;
+  border-bottom : black solid 1px;
   text-align : center;
-  border : 1px solid black;
-  height : 30px;
-  font-size : 20px;
+
+  height : 25px;
+  font-size : 15px;
 
 }
 .topTable{
-  border: black solid 2px;
+
   text-align : center;
-  border : 1px solid black;
+  border-top : 1px solid black;
+  border-bottom : 1px solid black;
   height : 33px;
-  font-size : 25px;
-  font-style : bold;
+  font-size : 15px;
+  font-weight : bold;
 }
 table{
   border-collapse: collapse;
@@ -48,43 +44,68 @@ table{
 }
 
 body{
-  background-color : black;
+  background-color: grey;
 
 }
 div.scroll { 
- 
+  position : absolute;
+  right : 20px;
+  top : 60px;
   height: 46.85vh;
   overflow-x: hidden; 
   overflow-x: auto; 
   text-align:justify; 
-  border-radius :4%;
+  border : black solid 1px;
   z-index : 1000;
-  position : relative;
+
+  background-color : white;
+
+  width : 40%;
+
+
+
+
+  border-radius : 4px;
+
+
+
+
+  z-index : 1000;
 } 
+
 
 .caseTitle{
   position : sticky;
   top : 0;
-  background-color :rgb(83, 79, 79);
-  box-shadow : 0 0 20px 10px rgb(83, 79, 79);
+  background-color :white;
+  box-shadow : 0 0 20px 10px white;
+  font-size:22px;
 
-  border-radius : 4%;
+}
+.caseTitle2{
+
+  top : 0;
+  background-color :white;
+
+  font-size:23px;
+
 }
 
 .total{
 
   font-size : 25px;
   color : black;
-  margin-left : 20px;
+  margin-left : 10px;
 }
 .death{
   font-size : 20px;
   margin-bottom :  20px;
   color : red;
-  margin-left : 20px;
+  margin-left : 10px;
 }
 .map{
-  width : 70%;
+  width : 100%;
+
 }
 
 .county{
@@ -98,7 +119,7 @@ div.scroll {
 
 .compare{
   color : green;
-  font-size : 15px;
+  font-size : 12px;
 }
 
 .legendL{
@@ -106,6 +127,329 @@ div.scroll {
 }
 .legend{
   float: right;
+  font-size : 12px;
+  margin-right : 1px;
+}
+.legendR{
+  margin-top : 10px;
+  margin-right : 10px;
+  margin-bottom : 15px;
+}
+.drawerTitle{
+  position : absolute;
+  top : 30px;
+  font-weight : bold;
+
+}
+.coronamap{
+  margin-top : 50px;
+  font-size : 15px;
+  margin-left : 15px;
+  margin-right : 15px;
+
+  
+}
+.coronamap p{
+  margin-bottom : 15px;
+}
+.about{
+  margin-top : 200px;
+  font-size : 15px;
+  margin-left : 15px;
+}
+.about p{
+  margin-bottom : 15px;
+}
+#drawer{
+  width : 25%;
+
+}
+
+.graph{
+
+ position : Absolute;
+  bottom: -17em;
+
+  height : 280px;
+  width: 100%;
+  border : black solid 1px;
+  background-color : white;
+  z-index : 1000;
+  border-radius : 4px;
+
+}
+
+.info_compared{
+  color : green;
+  font-size : 10px;
+}
+.info{
+  position : absolute;
+  height: 40vh;
+  bottom : -36.3em;
+
+  overflow-x: hidden; 
+  overflow-x: auto; 
+  text-align:justify; 
+  border : black solid 1px;
+  z-index : 1000;
+
+  background-color : white;
+
+  width : 100%;
+
+
+  background-clip : padding-box;
+  border-radius : 4px;
+
+
+
+
+  z-index : 1000;
+}
+
+.info h3{
+  font-size : 18px;
+}
+.info ul{
+  margin-top : 20px;
   font-size : 15px;
   margin-right : 10px;
+  margin-left : 15px;
+}
+.info a{
+
+  margin-top : 15px;
+  margin-left : 15px;
+
+}
+
+
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  
+body, h1, p, ul, h2,h3,h4,h5, dl, dd{
+  margin : 0;
+  padding : 0;
+  font-family : 'Rubik';
+}
+li{
+  list-style-type: none;
+}
+h1,h2,h3,h4,h5{
+  font-size : 100;
+  font-weight: normal;
+}
+.title{
+  margin-top : 10px;
+  margin-bottom : -30px;
+}
+.num{
+  position : relative;
+}
+.data{
+  border-bottom : black solid 1px;
+  text-align : center;
+
+  height : 25px;
+  font-size : 15px;
+
+}
+.topTable{
+
+  text-align : center;
+  border-top : 1px solid black;
+  border-bottom : 1px solid black;
+  height : 33px;
+  font-size : 15px;
+  font-weight : bold;
+}
+table{
+  border-collapse: collapse;
+  table-layout: fixed; 
+  width: 100%;
+
+}
+
+body{
+  background-color: grey;
+
+}
+div.scroll { 
+  position : absolute;
+  right : 20px;
+  top : 20px;
+  height: 46.85vh;
+  overflow-x: hidden; 
+  overflow-x: auto; 
+  text-align:justify; 
+  border : black solid 1px;
+  z-index : 1000;
+
+  background-color : white;
+
+  width : 260px;
+
+
+
+
+  border-radius : 4px;
+
+
+
+
+  z-index : 1000;
+} 
+
+
+.caseTitle{
+  position : sticky;
+  top : 0;
+  background-color :white;
+  box-shadow : 0 0 20px 10px white;
+  font-size:22px;
+
+}
+.caseTitle2{
+
+  top : 0;
+  background-color :white;
+
+  font-size:23px;
+
+}
+
+.total{
+
+  font-size : 25px;
+  color : black;
+  margin-left : 10px;
+}
+.death{
+  font-size : 20px;
+  margin-bottom :  20px;
+  color : red;
+  margin-left : 10px;
+}
+.map{
+  width : 70%;
+  padding-top : 56.25%;
+}
+
+.county{
+  font-size : 20px;
+  text-align: center;
+}
+
+.number{
+  color : red;
+}
+
+.compare{
+  color : green;
+  font-size : 12px;
+}
+
+.legendL{
+  color : green;
+}
+.legend{
+  float: right;
+  font-size : 12px;
+  margin-right : 1px;
+}
+.legendR{
+  margin-top : 10px;
+  margin-right : 10px;
+  margin-bottom : 15px;
+}
+.drawerTitle{
+  position : absolute;
+  top : 30px;
+  font-weight : bold;
+
+}
+.coronamap{
+  margin-top : 50px;
+  font-size : 15px;
+  margin-left : 15px;
+  margin-right : 15px;
+
+  
+}
+.coronamap p{
+  margin-bottom : 15px;
+}
+.about{
+  margin-top : 200px;
+  font-size : 15px;
+  margin-left : 15px;
+}
+.about p{
+  margin-bottom : 15px;
+}
+#drawer{
+  width : 25%;
+
+}
+
+.graph{
+  position : absolute;
+  bottom : 20px;
+  right : 20px;
+
+  height : 280px;
+
+  border : black solid 1px;
+  background-color : white;
+  z-index : 1000;
+  border-radius : 4px;
+
+}
+
+.info_compared{
+  color : green;
+  font-size : 10px;
+}
+.info{
+  position : absolute;
+  height: 40vh;
+  left : 20px;
+  bottom : 20px;
+  overflow-x: hidden; 
+  overflow-x: auto; 
+  text-align:justify; 
+  border : black solid 1px;
+  z-index : 1000;
+
+  background-color : white;
+
+  width : 400px;
+
+
+  background-clip : padding-box;
+  border-radius : 4px;
+
+
+
+
+  z-index : 1000;
+}
+
+.info h3{
+  font-size : 18px;
+}
+.info ul{
+  margin-top : 20px;
+  font-size : 15px;
+  margin-right : 10px;
+  margin-left : 15px;
+}
+.info a{
+
+  margin-top : 15px;
+  margin-left : 15px;
+
+}
+
 }
