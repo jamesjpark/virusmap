@@ -51,7 +51,7 @@ render() {
 const { classes } = this.props;
 return (
 <div className={classes.root}>
-<AppBar  position="static">
+<AppBar position="static">
     <div className= "title" ><center>Texas COVID-19 Map</center></div>
 <IconButton className={classes.menuButton} color= "inherit" onClick={this.handleDrawerToggle} >
 <MenuIcon/>
@@ -61,24 +61,21 @@ return (
 
 <MenuItem className ="drawerTitle" onClick={this.handleDrawerToggle}>BACK to Texas COVID-19 Map</MenuItem>
 <div className = "coronamap">
-<p>Provides information about COVID-19 by counties in Texas</p>
+   <p>Provides information about COVID-19 by counties in Texas</p>
    <p> You can see which counties have how many confirmed cases,</p>
    <p>and how the numbers are changing.</p> 
-    <p>All the information is from </p>
+   <p>All the information is from </p>
 
-   <a className = "link" href = "https://www.dshs.state.tx.us/news/updates.shtm#coronavirus">https://www.dshs.state.tx.us/news/updates.shtm#coronavirus,</a>
+   <a className = "link" href = "https://www.dshs.state.tx.us/news/updates.shtm#coronavirus" target="_blank">https://www.dshs.state.tx.us/news/updates.shtm#coronavirus</a>
 </div>
 
 <div className = "about">
 <MenuItem onClick={this.onClickFn}className="aboutElement">{this.state.about}</MenuItem>
-<div classname = "aboutElement">
+<div className = "aboutElement">
     <p>{this.state.about1}</p>
     <p>{this.state.about2}</p>
-    <a href = "https://www.jamespark.info">{this.state.about3}</a>
-
-
+    <a href = "https://www.jamespark.info" target="_blank">{this.state.about3}</a>
 </div>
-
 </div>
 
 

@@ -79,9 +79,13 @@ div.scroll {
   top : 0;
   background-color :white;
   box-shadow : 0 0 20px 10px white;
-  font-size:22px;
-
+  font-size: 20px;
+  overflow: auto;
+  word-wrap: break-word;
+  text-align: start;
+    padding: 10px
 }
+
 .caseTitle2{
 
   top : 0;
@@ -155,21 +159,21 @@ div.scroll {
 .about{
   margin-top : 200px;
   font-size : 15px;
-  margin-left : 15px;
+  margin-left : 10px;
 }
 .about p{
   margin-bottom : 15px;
 }
+.aboutElement{
+  padding-left : 20px;
+}
 #drawer{
   width : 25%;
-
 }
 
 .graph{
-
- position : Absolute;
+  position : Absolute;
   bottom: -17em;
-
   height : 280px;
   width: 100%;
   border : black solid 1px;
@@ -381,9 +385,8 @@ div.scroll {
   margin-bottom : 15px;
 }
 .about{
-  margin-top : 200px;
   font-size : 15px;
-  margin-left : 15px;
+  margin: 200px 0px 0px 0px;
 }
 .about p{
   margin-bottom : 15px;

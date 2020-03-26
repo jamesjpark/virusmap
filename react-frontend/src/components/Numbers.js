@@ -81,21 +81,13 @@ class Numbers extends Component {
           });
         
     })
-
-
-    
-         
-    
-
   }
   
-    
     render() {
         return (
             <div className = "num">
                 <div className = "scroll">
-                    <h2 className = "caseTitle">COVID-19 Cases in Texas</h2>
-                    <br></br>
+                    <h2 className = "caseTitle">COVID-19 <br></br>Cases in Texas</h2>
                     <div className = "legend">
                     <span className = "legendL">( ) : </span>
                     <span className = "legendR">change of numbers since 03/17/2020</span>

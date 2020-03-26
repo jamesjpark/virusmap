@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { GoogleApiWrapper, InfoWindow, Map, Marker } from 'google-maps-react';
 import previousData from '../data/23-Mar-2020corona-data.json'
-
 import Geocode from "react-geocode";
-
-Geocode.setApiKey("AIzaSyDk5zS4teB6rs0CKgbL_ptbxRhekDGMuig");
+require('dotenv').config()
+const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY
+Geocode.setApiKey(GOOGLE_API_KEY);
 Geocode.enableDebug();
 
 class GoogleMapsContainer extends Component {
@@ -198,16 +198,12 @@ class GoogleMapsContainer extends Component {
                 <span className ="number">death : {searchDeath(this.state.selectedPlace.name)} </span>
            </div>
          </InfoWindow>
- 
-        
       </Map>
-
-      
     );
     
   }
   
 }
 export default GoogleApiWrapper({
-    apiKey: ("AIzaSyDk5zS4teB6rs0CKgbL_ptbxRhekDGMuig")
+    apiKey: (GOOGLE_API_KEY)
 })(GoogleMapsContainer)

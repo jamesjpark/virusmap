@@ -33,8 +33,6 @@ def scrape():
         else:
             num = x[1]
             county = x[0]
-        print(county)
-        print(num)
         case = {
             "county": county,
             "number": num,
@@ -64,8 +62,6 @@ def totalNum():
     sp = sentence.split("least ")
     sp2 = sp[1].split(" people")
     death = sp2[0]
-    print(total)
-    print(death)
 
     totalArr = []
     totalArr.append(total)
@@ -75,7 +71,6 @@ def totalNum():
 
 now = datetime.datetime.now().hour
 start = now
-print(now)
 
 case = scrape()
 total = totalNum()
@@ -88,14 +83,10 @@ CORS(app)
 
 @app.route("/")
 def my_index():
-    print(datetime.datetime.now().hour)
-    print(start)
     if (datetime.datetime.now().hour - start) > 12:
         caseArr = scrape()
-        print("SCRAPED!!")
     elif (datetime.datetime.now().hour - start) < 0:
         caseArr = scrape()
-        print("SCRAPED!!")
     else:
         caseArr = case
     return jsonify(caseArr)
@@ -105,12 +96,9 @@ def my_index():
 def index():
     if (datetime.datetime.now().hour - start) > 12:
         totalArr = totalNum()
-        print("SCRAPED!!")
     elif (datetime.datetime.now().hour - start) < 0:
         totalArr = totalNum()
-        print("SCRAPED!!")
     else:
         totalArr = total
     return jsonify(totalArr)
-
 app.run(debug=True)
