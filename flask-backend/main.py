@@ -10,37 +10,37 @@ from flask_cors import CORS
 import datetime
 
 def scrape():
-    source = requests.get('https://www.dshs.state.tx.us/news/updates.shtm#coronavirus', verify=False)
+    source = requests.get('https://www.livescience.com/texas-coronavirus-updates.html', verify=False)
 
     text = source.content
 
     soup = BeautifulSoup(text, 'lxml')
 
-    tbody = soup.find_all('tbody')
 
-
-
-    arr = tbody[2].find_all('td')
-
-    i = 0
+    article = soup.find(id="article-body")
+    tbody = article.find_all('ul')
+    arr = tbody[0].find_all('li')
     caseArr = []
 
+    i = 0
+
     while i < len(arr):
-        county = arr[i].text
-        num = arr[i + 1].text
-        death = arr[i + 2].text
+        x = arr[i].text.split(" County: ")
+
+        if len(x) == 1:
+            num = 0
+            county = arr[i].text.split(" County")[0]
+        else:
+            num = x[1]
+            county = x[0]
         print(county)
         print(num)
-        print()
         case = {
             "county": county,
             "number": num,
-            "death" : death
         }
         caseArr.append(case)
-        i += 3
-
-    print(caseArr)
+        i += 1
     # with open('corona-data.json', 'w') as outfile:
     #     json.dump(caseArr, outfile)
 
@@ -49,18 +49,26 @@ def scrape():
     return caseArr
 
 def totalNum():
-    source = requests.get('https://www.dshs.state.tx.us/news/updates.shtm#coronavirus', verify=False)
+    source = requests.get('https://www.livescience.com/texas-coronavirus-updates.html', verify=False)
 
     text = source.content
 
     soup = BeautifulSoup(text, 'lxml')
+    article = soup.find(id="article-body")
+
+    arr2 = article.find_all('p')
+    sentence = arr2[1].text
+    split = sentence.split("Texas now has ")
+    split2 = split[1].split("\xa0confirmed")
+    total = split2[0]
+    sp = sentence.split("least ")
+    sp2 = sp[1].split(" people")
+    death = sp2[0]
+    print(total)
+    print(death)
 
     totalArr = []
-    tbody = soup.find_all('tbody')
-    arr2 = tbody[1].find_all('td')
-    total = arr2[0].text
     totalArr.append(total)
-    death = arr2[1].text
     totalArr.append(death)
 
     return totalArr

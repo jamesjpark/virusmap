@@ -397,7 +397,7 @@ div.scroll {
   position : absolute;
   bottom : 20px;
   right : 20px;
-
+  width : 400px;
   height : 280px;
 
   border : black solid 1px;
