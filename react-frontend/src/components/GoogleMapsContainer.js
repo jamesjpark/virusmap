@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { GoogleApiWrapper, InfoWindow, Map, Marker } from 'google-maps-react';
-import previousData from '../data/23-Mar-2020corona-data.json'
+import previousData from '../data/25-Mar-2020corona-data.json'
 import Geocode from "react-geocode";
 require('dotenv').config()
 const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY
@@ -63,22 +63,26 @@ class GoogleMapsContainer extends Component {
      }
       var tot =  currTot-prevTot;
       console.log(tot)
-     for( i =0; i<dataCopy.length; i++){
-     if(dataCopy[i].county === prevCopy[j].county){
-       var tmp = dataCopy[i].number - prevCopy[j].number;
-       if(tmp < 0){
-         dataCopy[i].prevNum = "-"+tmp;
+      for( i =0; i<dataCopy.length; i++){
+        dataCopy[i].prevNum = "+"+dataCopy[i].number;
 
-       }
-       dataCopy[i].prevNum = "+"+tmp;
+        for( j = 0; j < prevCopy.length; j++){
 
-       j++;
-     }
-     else{
-       dataCopy[i].prevNum = "+"+dataCopy[i].number;
 
-     }
-   }
+          if(dataCopy[i].county === prevCopy[j].county){
+            var tmp = dataCopy[i].number - prevCopy[j].number;
+            if(tmp < 0){
+              dataCopy[i].prevNum = "-"+tmp;
+
+            }
+            dataCopy[i].prevNum = "+"+tmp;
+
+
+          }
+        }
+        
+        
+      }
    
    this.setState({
      data : dataCopy

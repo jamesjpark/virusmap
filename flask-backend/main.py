@@ -14,7 +14,7 @@ def scrape():
 
     text = source.content
 
-    soup = BeautifulSoup(text, 'lxml')
+    soup = BeautifulSoup(text, 'html.parser')
 
 
     article = soup.find(id="article-body")

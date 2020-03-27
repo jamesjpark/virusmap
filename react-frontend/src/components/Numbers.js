@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import previousData from '../data/17-Mar-2020corona-data.json'
+import previousData from '../data/20-Mar-2020corona-data.json'
 
 
 class Numbers extends Component {
@@ -46,21 +46,25 @@ class Numbers extends Component {
            var tot =  currTot-prevTot;
            console.log(tot)
           for( i =0; i<dataCopy.length; i++){
-          if(dataCopy[i].county === prevCopy[j].county){
-            var tmp = dataCopy[i].number - prevCopy[j].number;
-            if(tmp < 0){
-              dataCopy[i].prevNum = "-"+tmp;
-
-            }
-            dataCopy[i].prevNum = "+"+tmp;
-
-            j++;
-          }
-          else{
             dataCopy[i].prevNum = "+"+dataCopy[i].number;
 
-          }
-        }
+            for( j = 0; j < prevCopy.length; j++){
+
+
+              if(dataCopy[i].county === prevCopy[j].county){
+                var tmp = dataCopy[i].number - prevCopy[j].number;
+                if(tmp < 0){
+                  dataCopy[i].prevNum = "-"+tmp;
+  
+                }
+                dataCopy[i].prevNum = "+"+tmp;
+  
+  
+              }
+            }
+            
+            
+          } 
         
         this.setState({
           data : dataCopy
@@ -81,16 +85,24 @@ class Numbers extends Component {
           });
         
     })
+
+
+    
+         
+    
+
   }
   
+    
     render() {
         return (
             <div className = "num">
                 <div className = "scroll">
-                    <h2 className = "caseTitle">COVID-19 <br></br>Cases in Texas</h2>
+                    <h2 className = "caseTitle">COVID-19 Cases in Texas</h2>
+                    <br></br>
                     <div className = "legend">
                     <span className = "legendL">( ) : </span>
-                    <span className = "legendR">change of numbers since 03/17/2020</span>
+                    <span className = "legendR">change of numbers since 03/18/2020</span>
                     <br></br>
                     <span className = "legendR">*Does not include repatriation cases.</span>
                     <br></br>
