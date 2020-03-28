@@ -4,10 +4,10 @@ import {
 } from 'recharts';
 import data17 from '../data/17-Mar-2020corona-data.json'
 
-import data19 from '../data/20-Mar-2020corona-data.json'
+import data19 from '../data/21-Mar-2020corona-data.json'
 
-import data21 from '../data/23-Mar-2020corona-data.json'
-import data23 from '../data/25-Mar-2020corona-data.json'
+import data21 from '../data/24-Mar-2020corona-data.json'
+import data23 from '../data/28-Mar-2020corona-data.json'
 
 
 
@@ -65,16 +65,16 @@ class Graph2 extends PureComponent {
           name: '3/17', Case: this.state.data1, 
         },
         {
-          name: '3/20', Case: this.state.data2,  
+          name: '3/21', Case: this.state.data2,  
           IncreasedBy: this.state.data2 - this.state.data1
         },
         {
-          name: '3/23', Case: this.state.data3,  
+          name: '3/24', Case: this.state.data3,  
           IncreasedBy: this.state.data3 - this.state.data2
 
         },
         {
-          name: '3/25', Case: this.state.data4, 
+          name: '3/28', Case: this.state.data4, 
           IncreasedBy: this.state.data4 - this.state.data3
 
         },

@@ -45,7 +45,7 @@ class GoogleMapsContainer extends Component {
   
 
   componentDidMount() {
-    fetch('http://localhost:5000')
+    fetch('http://virus-backend-dev.us-east-2.elasticbeanstalk.com')
     .then(res => res.json())
     .then(data => {
       this.setState({
@@ -197,7 +197,7 @@ class GoogleMapsContainer extends Component {
            <div> <h4 className = "county">{this.state.selectedPlace.name} County</h4>
                 <span >{searchNum(this.state.selectedPlace.name)} </span> <span>cases</span>
                 <br></br>
-                <span className = "info_compared">{searchCom(this.state.selectedPlace.name)} since yesterday</span>
+                <span className = "info_compared">{searchCom(this.state.selectedPlace.name)} since 3 days ago</span>
                 <br></br>
                 <span className ="number">death : {searchDeath(this.state.selectedPlace.name)} </span>
            </div>
